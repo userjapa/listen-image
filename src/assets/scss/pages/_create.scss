@@ -1,0 +1,90 @@
+.create {
+  height: 100%;
+  text-align: center;
+  &__heading {
+    margin-bottom: 2rem;
+  }
+  &__box {
+    width: auto;
+    height: 95%;
+    display: grid;
+    border: 2px solid green;
+    &__view {
+      border: 2px solid red;
+    }
+    &__form {
+      border: 2px solid red;
+      display: flex;
+      &__questions {
+        border: 2px solid black;
+        flex-grow: 1;
+        padding: 1.5rem;
+        & table {
+          width: 100%;
+        }
+      }
+      &__question {
+        border: 2px solid black;
+        flex-basis: 50%;
+        padding: 1.5rem;
+        &__info {
+          & input {
+            width: 30rem;
+            margin-bottom: 5px;
+            &[type="file"] {
+              padding: .75rem;
+            }
+            &[type="text"] {
+              font-size: 1.5rem;
+              padding: 1rem .75rem;
+            }
+          }
+          & button[type="submit"] {
+            padding: .75rem 3rem;
+            border-radius: 5px;
+            width: 32rem;
+          }
+        }
+        &__answer {
+          & input {
+            width: 25rem;
+            padding: 1rem .75rem;
+            font-size: 1.5rem;
+          }
+          & button {
+            padding: 1rem 1rem;
+          }
+        }
+        &__answers {
+          &__item {
+            position: relative;
+            & img {
+              width: 10rem;
+              z-index: -10;
+              &:hover {
+                z-index: 10 !important;
+                transform: scale(2);
+              }
+            }
+          }
+        }
+        & form {
+          margin-bottom: 10px;
+          & input, button {
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            &:active,
+            &:focus {
+              outline: none;
+            }
+          }
+          & button:hover {
+            cursor: pointer;
+            background-color: #bbb;
+            border-color: #bbb;
+          }
+        }
+      }
+    }
+  }
+}
