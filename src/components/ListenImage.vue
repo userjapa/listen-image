@@ -27,8 +27,13 @@
       </div>
     </div>
     <div class="game__options">
-      <button class="game__options__btn" :disabled="!question.answered">Next</button>
-      <button class="game__options__btn">Finish</button>
+      <button class="game__options__btn"
+              :disabled="!question.answered"
+              @click="setCurrent(exercise.questions)"
+              v-if="!ended">
+                Next
+      </button>
+      <button class="game__options__btn" v-else>Finish</button>
     </div>
   </div>
 </template>
@@ -39,31 +44,31 @@ export default {
   data () {
     return {
       question: {
-        question: 'Truck',
-        audio: 'https://vignette.wikia.nocookie.net/leagueoflegends/images/b/b5/TahmKench.attack13.ogg/revision/latest?cb=20150624150708',
+        // question: 'Truck',
+        // audio: 'https://vignette.wikia.nocookie.net/leagueoflegends/images/b/b5/TahmKench.attack13.ogg/revision/latest?cb=20150624150708',
         answers: [
-          {
-            correct: true,
-            img: 'https://www.trucks.com/wp-content/uploads/2018/01/truck-brian-california.jpg',
-            selected: false
-          },
-          {
-            correct: false,
-            img: 'https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&cs=tinysrgb&h=350',
-            selected: false
-          },
-          {
-            correct: false,
-            img: 'https://wexfordbus.com/web/app/uploads/2016/09/our-buses.jpg',
-            selected: false
-          },
-          {
-            correct: false,
-            img: 'https://www.bahn.com/en/view/mdb/pv/agenturservice/2011/mdb_22990_ice_3_schnellfahrstrecke_nuernberg_-_ingolstadt_1000x500_cp_0x144_1000x644.jpg',
-            selected: false
-          }
+          // {
+          //   correct: true,
+          //   img: 'https://www.trucks.com/wp-content/uploads/2018/01/truck-brian-california.jpg',
+          //   selected: false
+          // },
+          // {
+          //   correct: false,
+          //   img: 'https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&cs=tinysrgb&h=350',
+          //   selected: false
+          // },
+          // {
+          //   correct: false,
+          //   img: 'https://wexfordbus.com/web/app/uploads/2016/09/our-buses.jpg',
+          //   selected: false
+          // },
+          // {
+          //   correct: false,
+          //   img: 'https://www.bahn.com/en/view/mdb/pv/agenturservice/2011/mdb_22990_ice_3_schnellfahrstrecke_nuernberg_-_ingolstadt_1000x500_cp_0x144_1000x644.jpg',
+          //   selected: false
+          // }
         ],
-        answered: false
+        // answered: false
       },
       index: 0,
       ended: false,
@@ -78,10 +83,13 @@ export default {
     setCurrent (questions) {
       for (const ind in questions) {
         this.index = ind
-        if (!questions[ind].answered) this.question = questions[ind]
-        else if (ind == (questions.length - 1)) {
+        if (!questions[ind].answered) {
           this.question = questions[ind]
-          this.end = true
+          break
+        } else if (ind == (questions.length - 1)) {
+          this.question = questions[ind]
+          this.ended = true
+          break
         }
       }
     },
@@ -99,7 +107,13 @@ export default {
     'question.audio': function () {
       this.$refs['audio'].pause()
       this.$refs['audio'].load()
-    }
+    },
+    // 'exercise.questions': function (questions) {
+    //   this.setCurrent(questions)
+    // }
+  },
+  mounted () {
+    this.setCurrent(this.exercise.questions)
   }
 }
 </script>
@@ -150,12 +164,19 @@ export default {
     border: 2px solid blue;
     padding: 1rem 2rem;
     display: flex;
+    flex-wrap: wrap;
     height: 100%;
     &__image {
       border: .75rem solid white;
       flex-grow: 1;
       border-radius: 2.5rem;
       background-size: cover;
+      width: auto;
+      max-width: 50rem;
+      min-width: 30rem;
+      height: auto;
+      max-height: 30rem;
+      min-height: 20rem;
       &:not(:last-child) {
         margin-right: 2rem;
       }

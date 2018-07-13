@@ -12,6 +12,15 @@ html, body {
   border: none;
 }
 
+a, button {
+  text-decoration: none;
+  color: #000;
+  &:active,
+  &:focus {
+    outline: none;
+  }
+}
+
 .app {
   font-size: 1.6rem;
   height: 100vh;

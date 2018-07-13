@@ -41,7 +41,7 @@ export default new Vuex.Store({
       return toUpdate
     },
     hasToUpdate ({ toUpdate }) {
-      if (!toUpdate) return false
+      if (toUpdate == null) return false
       else return true
     }
   },

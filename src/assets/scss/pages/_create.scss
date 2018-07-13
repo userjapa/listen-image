@@ -8,25 +8,52 @@
     width: auto;
     height: 95%;
     display: grid;
-    border: 2px solid green;
-    &__view {
-      border: 2px solid red;
-    }
     &__form {
-      border: 2px solid red;
       display: flex;
       &__questions {
-        border: 2px solid black;
         flex-grow: 1;
         padding: 1.5rem;
         & table {
           width: 100%;
         }
+        & button {
+          padding: .5rem 1rem;
+          border-radius: .3rem;
+          transition: all .2s;
+          &:hover {
+            cursor: pointer;
+          }
+          &:disabled {
+            cursor: not-allowed;
+          }
+        }
+        &__edit {
+          background-color: #5d8cd8;
+          &:hover {
+            background-color: darken(#5d8cd8, 10);
+            color: #fff;
+          }
+          &:disabled {
+            background-color: lighten(#5d8cd8, 20);
+            color: #eee;
+          }
+        }
+        &__remove {
+          background-color: #ff635b;
+          &:hover {
+            background-color: darken(#ff635b, 10);
+            color: #fff;
+          }
+          &:disabled {
+            background-color: lighten(#ff635b, 15);
+            color: #eee;
+          }
+        }
       }
       &__question {
-        border: 2px solid black;
         flex-basis: 50%;
         padding: 1.5rem;
+        overflow-y: scroll;
         &__info {
           & input {
             width: 30rem;
@@ -39,10 +66,15 @@
               padding: 1rem .75rem;
             }
           }
-          & button[type="submit"] {
+          & button {
             padding: .75rem 3rem;
             border-radius: 5px;
-            width: 32rem;
+            &[type="submit"] {
+              width: 32rem;
+            }
+            &[type="button"] {
+              width: 15.7rem;
+            }
           }
         }
         &__answer {
@@ -58,12 +90,48 @@
         &__answers {
           &__item {
             position: relative;
+            display: flex;
+            justify-content: center;
+            flex-direction: row;
+            padding: 0 24rem;
+            &__img {
+              flex-basis: 26rem;
+            }
+            &__correct {
+              flex-basis: 9rem;
+              display: flex;
+              justify-content: center;
+              & input {
+                  margin: auto;
+              }
+            }
+            &__option {
+              flex-basis: 10rem;
+              display: flex;
+              justify-content: center;
+              & button {
+                align-self: center;
+                background-color: #ff635b;
+                padding: .25rem .75rem;
+                border-radius: .25rem;
+                &:hover {
+                  background-color: darken(#ff635b, 10);
+                }
+              }
+            }
+            &:first-child {
+              margin-bottom: .5rem;
+            }
             & img {
               width: 10rem;
-              z-index: -10;
+              transition: all .2s;
+              &:not(:hover) {
+                z-index: -10;
+              }
               &:hover {
-                z-index: 10 !important;
+                z-index: 10;
                 transform: scale(2);
+                position: relative;
               }
             }
           }
